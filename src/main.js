@@ -1,4 +1,13 @@
 // Create variables targetting the relevant DOM elements here 👇
+var randomTitle = document.querySelector('.cover-title');
+var randomImage = document.querySelector('.cover-image');
+var randomTagline1 = document.querySelector('.tagline1');
+var randomTagline2 = document.querySelector('.tagline2');
+
+var newHomeButton = document.querySelector('.home-button hidden');
+var newRandomButton = document.querySelector('.random-cover-button');
+var newSaveButton = document.querySelector('.view-saved-button');
+var newMakeButton = document.querySelector('.make-new-button');
 
 
 // We've provided a few variables below
@@ -14,6 +23,6 @@ var currentCover;
 
 
 // We've provided one function to get you started
-function getRandomIndex(array) {
-  return Math.floor(Math.random() * array.length);
+function getRandomIndex(randomImage) {
+  return Math.floor(Math.random() * covers.length);
 }
