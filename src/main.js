@@ -24,7 +24,7 @@ var newMakeButton = document.querySelector(".make-new-button");
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunsets", "sorrows")
 ];
-var currentCover;
+var currentCover; 
 
 // Add your event listeners here 👇
 
@@ -33,7 +33,7 @@ var currentCover;
 
 
 // We've provided one function to get you started
-function getRandomIndex(covers) {
-  return Math.floor(Math.random() * covers.length);
+function getRandomIndex(arrays) {
+  return Math.floor(Math.random() * arrays.length);
 }
-console.log(getRandomIndex());
+// console.log(getRandomIndex());
