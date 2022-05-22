@@ -19,6 +19,8 @@ var userTitle = document.querySelector(".user-title");
 var userDesc1 = document.querySelector(".user-desc1");
 var userDesc2 = document.querySelector(".user-desc2");
 
+var savedCoverSection = document.querySelector(".saved-covers-section");
+
 // var cover = userCover.value
 // var title = userTitle.value;
 // var desc1 = userDesc1.value;
@@ -27,7 +29,7 @@ var userDesc2 = document.querySelector(".user-desc2");
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunrises", "stabs")
 ];
-var currentCover = new Cover(cover, title, desc1, desc2);
+var currentCover //= new Cover(cover, title, desc1, desc2);
 
 
 // var viewForm = document.createElement('.view form-view hidden');
@@ -59,6 +61,7 @@ function clickMakeButton(event) {
 };
 
 function clickSavedCoversButton(event) {
+  console.log('here whyyyyy');
   event.preventDefault();
   savedCoverView.classList.remove('hidden');
   mainCover.classList.add('hidden');
@@ -77,11 +80,24 @@ function clickSavedCoversButton(event) {
   var desc2 = descriptors[descriptors.length -1];
   randomTagline2.innerText = desc2;
   viewForm.classList.add('hidden');
-  mainCover.classList.remove('hidden');
-  // viewsaved cover takes us to an empty page.
-  // appent the html file to include the cover image
-  // needs to generate a new cover with information from the saved cover
-  // by pulling the last strings from the arrays
+
+  var savedCoverSection = document.querySelector(".saved-covers-section");
+
+
+
+  savedCovers.forEach(function(book) {
+  savedCoverSection.innerHTML += `<section class='mini-cover'> <img class="cover-image" src=${book.cover}>
+  <h2 class="cover-title">${book.title}</h2>
+  <h3 class="tagline">A tale of <span class="tagline-1">${book.tagline1}</span> and <span class="tagline-2">${book.tagline2}</span></h3></section>`
+ console.log(book);
+  })
+
+  // savedCovers.forEach(function(book) {
+  // var h3 = document.createElement('h3');
+  // h3.append(book.tagline1, book.tagline2);
+  // savedCoverSection.append(h3);
+  // })
+
 };
 
 function clickHomeButton(event) {
@@ -113,7 +129,9 @@ function makeCover(event) {
   covers.push(cover);
   titles.push(title);
   descriptors.push(desc1, desc2);
-}
+  var newSavedCover = new Cover(cover, title, desc1, desc2)
+  savedCovers.push(newSavedCover);
+};
 
 function saveCover(event) {
   event.preventDefault();
