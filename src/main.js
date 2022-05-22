@@ -19,11 +19,16 @@ var userTitle = document.querySelector(".user-title");
 var userDesc1 = document.querySelector(".user-desc1");
 var userDesc2 = document.querySelector(".user-desc2");
 
+// var cover = userCover.value
+// var title = userTitle.value;
+// var desc1 = userDesc1.value;
+// var desc2 = userDesc2.value;
 // // We've provided a few variables below
 var savedCovers = [
   new Cover("http://3.bp.blogspot.com/-iE4p9grvfpQ/VSfZT0vH2UI/AAAAAAAANq8/wwQZssi-V5g/s1600/Do%2BNot%2BForsake%2BMe%2B-%2BImage.jpg", "Sunsets and Sorrows", "sunrises", "stabs")
 ];
-var currentCover;
+var currentCover = new Cover(cover, title, desc1, desc2);
+
 
 // var viewForm = document.createElement('.view form-view hidden');
 // Add your event listeners here 👇
@@ -32,6 +37,8 @@ newMakeButton.addEventListener('click', clickMakeButton);
 newViewButton.addEventListener('click', clickSavedCoversButton);
 homeButton.addEventListener('click', clickHomeButton);
 makeMyBookButton.addEventListener('click', makeCover);
+newSaveButton.addEventListener('click', saveCover);
+
 
 function clickRandomButton() {
   randomTitle.innerText = changeCover(titles);
@@ -48,7 +55,7 @@ function clickMakeButton(event) {
   newMakeButton.classList.add('hidden');
   homeButton.classList.remove('hidden');
   newSaveButton.classList.remove('hidden');
-  newViewButton.classList.add('hidden');
+  newViewButton.classList.remove('hidden');
 };
 
 function clickSavedCoversButton(event) {
@@ -60,6 +67,21 @@ function clickSavedCoversButton(event) {
   homeButton.classList.remove('hidden');
   newViewButton.classList.add('hidden');
   newMakeButton.classList.add('hidden');
+
+  var cover = covers[covers.length -1];
+  randomImage.src = cover;
+  var title = titles[titles.length -1];
+  randomTitle.innerText = title;
+  var desc1 = descriptors[descriptors.length -2];
+  randomTagline1.innerText = desc1;
+  var desc2 = descriptors[descriptors.length -1];
+  randomTagline2.innerText = desc2;
+  viewForm.classList.add('hidden');
+  mainCover.classList.remove('hidden');
+  // viewsaved cover takes us to an empty page.
+  // appent the html file to include the cover image
+  // needs to generate a new cover with information from the saved cover
+  // by pulling the last strings from the arrays
 };
 
 function clickHomeButton(event) {
@@ -74,16 +96,43 @@ function clickHomeButton(event) {
   newSaveButton.classList.remove('hidden');
 }
 
+
+
 function makeCover(event) {
   event.preventDefault();
+  var cover = userCover.value
+  randomImage.src = cover;
   var title = userTitle.value;
-  userTitle.innerText = title;
+  randomTitle.innerText = title;
   var desc1 = userDesc1.value;
-  userDesc1.innerText = desc1;
+  randomTagline1.innerText = desc1;
   var desc2 = userDesc2.value;
-  userDesc2.innerText = desc2;
+  randomTagline2.innerText = desc2;
+  viewForm.classList.add('hidden');
+  mainCover.classList.remove('hidden');
+  covers.push(cover);
+  titles.push(title);
+  descriptors.push(desc1, desc2);
 }
 
+function saveCover(event) {
+  event.preventDefault();
+  var cover = userCover.value
+  var title = userTitle.value;
+  var desc1 = userDesc1.value;
+  var desc2 = userDesc2.value;
+  if (covers.includes(cover) === false) {
+    covers.push(cover)
+  }
+  if (titles.includes(title) === false) {
+    titles.push(title)
+  }
+  if(descriptors.includes(desc1, desc2) === false) {
+    descriptors.push(desc1, desc2)
+  }
+  console.log(covers, titles, descriptors);
+};
+// if (array.includes(value) === false) array.push(value);
 // Create your event handlers and other functions here 👇
 function changeCover(arrays) {
   var titleNumber = getRandomIndex(arrays);
